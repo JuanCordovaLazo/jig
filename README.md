@@ -20,7 +20,7 @@ jig wait --state 'Get.currentRoute == "/checkout"' --timeout 5s
 
 ## Status
 
-Pre-alpha, but the whole vertical slice runs: the contract, the app-side runtime, the
+1.0. The whole vertical slice runs: the contract, the app-side runtime, the
 GetX adapters, the driver, the CLI, the scenario runner and the MCP server. Twenty-three
 CLI verbs over eleven VM service extensions.
 
@@ -521,10 +521,23 @@ Consume by git ref:
 dependencies:
   jig_flutter:
     git:
-      url: git@github.com:JuanCordovaLazo/jig.git
+      url: https://github.com/JuanCordovaLazo/jig.git
       path: packages/jig_flutter
-      ref: v0.1.0-dev.1
+      ref: v1.0.0
+
+# A git dependency resolves its own dependencies against pub.dev, where these
+# packages are not published. Name every jig package the package above needs.
+dependency_overrides:
+  jig_protocol:
+    git:
+      url: https://github.com/JuanCordovaLazo/jig.git
+      path: packages/jig_protocol
+      ref: v1.0.0
 ```
+
+An app using the GetX adapter lists `jig_getx` as the dependency and overrides both
+`jig_flutter` and `jig_protocol`. Every override carries the same `ref`; mixing refs
+means running two contracts at once.
 
 During local development, override by path instead of pushing a tag.
 

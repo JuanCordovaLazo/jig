@@ -609,7 +609,7 @@ When a tool answers `NOT_CONNECTED` and the app is already running, call `connec
           },
           'serverInfo': <String, Object?>{
             'name': 'jig',
-            'version': '0.1.0-dev.1',
+            'version': jigVersion,
           },
           'instructions': instructions,
         });

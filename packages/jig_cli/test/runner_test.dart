@@ -24,7 +24,9 @@ final class _FakeVerbs implements JigVerbs {
   @override
   Future<JigResponse> ping() async {
     calls.add('ping');
-    return const JigResponse.ok(<String, Object?>{'protocol': '0.1'});
+    return const JigResponse.ok(<String, Object?>{
+      'protocol': jigProtocolVersion,
+    });
   }
 
   @override

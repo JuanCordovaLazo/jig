@@ -1,8 +1,17 @@
 # The jig contract
 
 Everything an agent sees crosses this boundary. Treat the shapes below as public
-API: adding a field is a minor change, renaming or removing one is major, and a
-frontend must refuse to guess when the protocol version differs.
+API, and version them with `jigProtocolVersion`:
+
+| Change | `jigProtocolVersion` | Package version |
+|---|---|---|
+| A field, event or verb is added and an existing consumer can ignore it | stays `1` | minor |
+| A field is renamed or removed, an existing shape changes meaning, or a new error becomes mandatory | becomes `2` | major |
+
+An additive change keeps protocol `1` and only ever adds: a consumer that does not
+know the new field still works. A breaking change moves the number, and a frontend
+that reaches a runtime declaring a different one must fail with a named error
+rather than issue commands against an unknown contract.
 
 ## Envelope
 

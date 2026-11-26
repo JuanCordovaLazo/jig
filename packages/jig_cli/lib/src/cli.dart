@@ -122,7 +122,7 @@ Future<int> _dispatch(
           'ok': true,
           'data': <String, Object?>{
             'protocol': jigProtocolVersion,
-            'cli': '0.1.0-dev.1',
+            'cli': jigVersion,
           },
         }),
       );

@@ -58,3 +58,28 @@ to "the command did not throw".
 `packages/jig_protocol` is the public API. Adding a field is a minor version;
 renaming or removing one is major. Update `docs/CONTRACT.md` in the same pull
 request - a contract change that exists only in code is a bug.
+
+## Releasing
+
+One version covers the workspace and one annotated tag names it. The tag is the
+address consumers install by, so it is written once: a defect in a released version
+becomes a new patch release, never a moved tag.
+
+```bash
+dart run melos version --yes    # bumps every package, writes changelogs, commits, tags vX.Y.Z
+./tool/verify.sh                # must pass before the tag leaves the machine
+git push --follow-tags
+```
+
+If the gate fails, amend the release commit and move the local tag with `git tag -f`.
+That is only safe while nothing has been pushed.
+
+`tool/check_release.sh vX.Y.Z` is what CI runs on the tag: it fails when the tag, any
+pubspec version, any internal constraint, `jigVersion`, or a changelog disagree. The
+1.0.0 cut was made by hand because the history at that point had no Conventional
+Commits; every release after it follows the recipe above, and melos derives the
+version and the changelogs from the commit subjects.
+
+Commits use the GitHub noreply address of the account that owns the repository. It
+is set in this repository's local configuration, so a clone that inherits a
+different global identity will publish the wrong author on every commit it makes.

@@ -1,6 +1,6 @@
 name: jig_driver
 description: Transport and verbs behind the jig CLI. Speaks the Dart VM service.
-version: 0.1.0-dev.1
+version: 1.0.0
 repository: https://github.com/JuanCordovaLazo/jig
 resolution: workspace
 
@@ -8,7 +8,7 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  jig_protocol: ^0.1.0-dev.1
+  jig_protocol: ^1.0.0
   vm_service: ^15.0.0
 dev_dependencies:
   test: ^1.31.1

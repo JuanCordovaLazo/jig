@@ -16,3 +16,20 @@ workspace:
 
 dev_dependencies:
   lints: ^6.0.0
+  melos: ^8.10.1
+
+# Release mechanics. The workspace already resolves dependencies, so melos is here
+# for the one thing pub does not do: moving seven versions and twelve internal
+# constraints in a single step, under a single tag.
+melos:
+  repository: https://github.com/JuanCordovaLazo/jig
+  command:
+    version:
+      mode: fixed
+      workspaceTag: true
+      versionPrivatePackages: true
+      changelogFormat:
+        groupByType: true
+      hooks:
+        preCommit: |
+          dart run tool/stamp_version.dart

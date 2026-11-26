@@ -1,6 +1,7 @@
 name: jig_fixture
 description: GetX conformance app for jig. Reproduces, on purpose, the failure modes that break coordinate-based harnesses.
 publish_to: none
+version: 1.0.0
 resolution: workspace
 
 environment:
@@ -12,9 +13,9 @@ dependencies:
     sdk: flutter
   flutter_slidable: ^5.2.0
   get: 4.7.3
-  jig_flutter: ^0.1.0-dev.1
-  jig_getx: ^0.1.0-dev.1
-  jig_protocol: ^0.1.0-dev.1
+  jig_flutter: ^1.0.0
+  jig_getx: ^1.0.0
+  jig_protocol: ^1.0.0
 
 dev_dependencies:
   flutter_test:

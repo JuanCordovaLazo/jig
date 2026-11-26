@@ -1,6 +1,6 @@
 name: jig_protocol
 description: Wire contract shared by the jig CLI, the jig MCP server and the app-side runtime.
-version: 0.1.0-dev.1
+version: 1.0.0
 repository: https://github.com/JuanCordovaLazo/jig
 issue_tracker: https://github.com/JuanCordovaLazo/jig/issues
 resolution: workspace

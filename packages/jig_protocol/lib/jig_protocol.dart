@@ -15,4 +15,12 @@ export 'src/state_entry.dart';
 
 /// Protocol version reported by `jig version` and by the `ext.jig.ping`
 /// extension, so a mismatched CLI can refuse to guess.
-const String jigProtocolVersion = '0.1';
+///
+/// Moves only when a wire change breaks existing consumers; an additive change
+/// keeps it and takes a minor package bump. See `docs/CONTRACT.md`.
+const String jigProtocolVersion = '1';
+
+/// The version of the jig package set. Every package shares it, so a frontend
+/// reports one number for the whole release. Rewritten by
+/// `tool/stamp_version.dart` from `packages/jig_protocol/pubspec.yaml`.
+const String jigVersion = '1.0.0';

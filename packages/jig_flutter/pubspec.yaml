@@ -1,6 +1,6 @@
 name: jig_flutter
 description: App-side runtime for jig. Framework agnostic event bus, semantics-driven element index and diagnostic VM service extensions.
-version: 0.1.0-dev.1
+version: 1.0.0
 repository: https://github.com/JuanCordovaLazo/jig
 resolution: workspace
 
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  jig_protocol: ^0.1.0-dev.1
+  jig_protocol: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

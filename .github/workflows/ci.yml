@@ -3,6 +3,8 @@ name: ci
 on:
   push:
     branches: [main]
+    # A tag is a release; it runs the whole gate, not only the release check.
+    tags: ['v*']
   pull_request:
 
 # The toolchain is pinned on purpose.
@@ -79,3 +81,15 @@ jobs:
       # that never became ready.
       - name: MCP smoke (wire)
         run: dart run tool/mcp_smoke.dart
+
+  # The tag is the only address a consumer has, so it must name the tree it claims
+  # to. This reads files and needs no toolchain. Adding `tags` to `on.push` also
+  # makes `analyze` and `test` run on the tagged commit, so the tag is verified
+  # whole rather than only for its metadata.
+  release-guard:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check the tag against the workspace
+        run: ./tool/check_release.sh "$GITHUB_REF_NAME"
