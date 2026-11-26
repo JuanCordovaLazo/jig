@@ -1,0 +1,81 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# The toolchain is pinned on purpose.
+#
+# A harness exists so that a red build means something, which it cannot do if the
+# gate moves on its own. Flutter `stable` now ships a `package:flutter/material.dart`
+# deprecated in favour of `package:material_ui/material_ui.dart`, so a routine
+# runner image update turned this workflow red for a reason that says nothing
+# about this code. Bumping the version is a deliberate commit, and it lands with
+# whatever migration it requires.
+env:
+  FLUTTER_VERSION: 3.47.7
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Show toolchain
+        run: flutter --version
+      - name: Resolve workspace
+        run: dart pub get
+      - name: Analyze workspace
+        run: dart analyze .
+      - name: Analyze fixture
+        working-directory: apps/fixture
+        run: flutter analyze
+
+  # Behaviour, not shape. Every defect found on a device so far was a verb that
+  # reported something other than what happened, and no analyzer can see that.
+  # Same pinned toolchain as `analyze`: a gate that moves on its own stops meaning
+  # anything. Keep this list in step with tool/verify.sh, which is the local entry
+  # point for the same checks.
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Show toolchain
+        run: flutter --version
+      - name: Resolve workspace
+        run: dart pub get
+      # Each package reports its own exit code: a single `dart test` at the root
+      # would not cover the packages that pin their own dependencies.
+      - name: Test jig_protocol
+        working-directory: packages/jig_protocol
+        run: dart test
+      - name: Test jig_driver
+        working-directory: packages/jig_driver
+        run: dart test
+      - name: Test jig_cli
+        working-directory: packages/jig_cli
+        run: dart test
+      - name: Test jig_mcp
+        working-directory: packages/jig_mcp
+        run: dart test
+      - name: Test jig_flutter
+        working-directory: packages/jig_flutter
+        run: flutter test
+      - name: Test fixture verbs
+        working-directory: apps/fixture
+        run: flutter test
+      # The only check that spawns the server. A map-level test cannot see a
+      # handshake that waits on the transport, and that failure looked like a server
+      # that never became ready.
+      - name: MCP smoke (wire)
+        run: dart run tool/mcp_smoke.dart

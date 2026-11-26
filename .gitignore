@@ -1,0 +1,20 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE
+.idea/
+.vscode/
+*.iml
+# .mcp.json is intentionally NOT ignored: it is the project-scoped MCP example the
+# README documents, and the portable format holds no secrets - a URI that changes on
+# every launch travels through $JIG_URI, not through that file.
+
+# jig sessions
+.jig/
+
+# OS
+.DS_Store

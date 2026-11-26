@@ -1,0 +1,12 @@
+{
+  "name": "overlays-dialog",
+  "steps": [
+    { "verb": "ping" },
+    { "verb": "tap", "key": "show_dialog" },
+    { "verb": "wait", "sem": "Dialogo", "timeoutMs": 2000 },
+    { "verb": "state", "expect": { "route": "/overlays" } },
+    { "verb": "tap", "key": "dialog_confirm" },
+    { "verb": "back" },
+    { "verb": "events", "since": 0, "sources": ["nav"], "limit": 20 }
+  ]
+}

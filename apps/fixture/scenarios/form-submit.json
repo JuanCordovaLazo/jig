@@ -1,0 +1,29 @@
+{
+  "name": "form-submit",
+  "steps": [
+    {
+      "verb": "tap",
+      "key": "nav_/form"
+    },
+    {
+      "verb": "wait",
+      "sem": "Nombre",
+      "timeoutMs": 3000
+    },
+    {
+      "verb": "type",
+      "sem": "Nombre",
+      "value": "Ana"
+    },
+    {
+      "verb": "tap",
+      "key": "submit"
+    },
+    {
+      "verb": "state",
+      "expect": {
+        "route": "/form"
+      }
+    }
+  ]
+}

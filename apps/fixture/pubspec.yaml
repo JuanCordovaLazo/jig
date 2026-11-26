@@ -1,0 +1,29 @@
+name: jig_fixture
+description: GetX conformance app for jig. Reproduces, on purpose, the failure modes that break coordinate-based harnesses.
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.9.0
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_slidable: ^5.2.0
+  get: 4.7.3
+  jig_flutter: ^0.1.0-dev.1
+  jig_getx: ^0.1.0-dev.1
+  jig_protocol: ^0.1.0-dev.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  # Bundles MaterialIcons-Regular.otf. Without it every Icons.* renders as a tofu
+  # box - the analyzer, the semantics tree and every other test stay silent.
+  uses-material-design: true

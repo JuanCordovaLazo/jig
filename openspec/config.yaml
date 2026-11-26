@@ -1,0 +1,42 @@
+schema: spec-driven
+
+context: |
+  Language: english
+  All artifacts must be written in english.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+githubCopilot:
+  cloudAgent: false
+
+# Per-artifact rules.
+#
+# These exist to keep a change cheap. The workflow earns its cost, but only while
+# each artifact stays small enough to read in one sitting. A design document with
+# seven decisions for a two-file change is ceremony, not rigour, and it is the main
+# reason a small change used to take a whole session.
+rules:
+  proposal:
+    - Keep proposals under 400 words
+    - State what is out of scope in one line, not a section
+  design:
+    - Record only decisions a reader could not infer from the proposal or the tasks
+    - Drop the Goals/Non-Goals/Risks scaffolding when there is nothing non-obvious in it
+    - A decision that the roadmap or an archived design already fixed is cited, not re-argued
+  tasks:
+    - Split where a task needs its own verification, and only there
+    - Each task names the command that proves it is done
+    - One task per behaviour area, not one per assertion
+    - Do not restate as a task work the spec already describes
+
+# Per-operation guidance.
+#
+# The per-task loop is the expensive part of apply: re-reading the instruction
+# payload after every checkbox costs more than the edits themselves. Batching does
+# not weaken the rule that a task is only ticked once its behaviour is verified.
+operations:
+  apply:
+    guidance:
+      - Mark task checkboxes in one pass at the end, not after every task
+      - Verify once with `tool/verify.sh` instead of re-running a suite per task
+  archive:
+    guidance:
+      - Skip the sync prompt when the change declares skip_specs

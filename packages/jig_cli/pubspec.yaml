@@ -1,0 +1,18 @@
+name: jig_cli
+description: Command line frontend for jig.
+version: 0.1.0-dev.1
+repository: https://github.com/JuanCordovaLazo/jig
+resolution: workspace
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  args: ^2.5.0
+  jig_driver: ^0.1.0-dev.1
+  jig_protocol: ^0.1.0-dev.1
+
+executables:
+  jig:
+dev_dependencies:
+  test: ^1.31.1

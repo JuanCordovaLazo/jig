@@ -1,0 +1,19 @@
+name: jig_mcp
+description: Model Context Protocol server for jig, over stdio.
+version: 0.1.0-dev.1
+repository: https://github.com/JuanCordovaLazo/jig
+resolution: workspace
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  jig_cli: ^0.1.0-dev.1
+  jig_driver: ^0.1.0-dev.1
+  jig_protocol: ^0.1.0-dev.1
+
+executables:
+  jig_mcp:
+
+dev_dependencies:
+  test: ^1.31.1

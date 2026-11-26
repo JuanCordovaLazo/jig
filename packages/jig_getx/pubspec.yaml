@@ -1,0 +1,16 @@
+name: jig_getx
+description: GetX adapter for jig. Traces every GetConnect exchange to the jig event bus.
+version: 0.1.0-dev.1
+repository: https://github.com/JuanCordovaLazo/jig
+resolution: workspace
+
+environment:
+  sdk: ^3.9.0
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.7.3
+  jig_flutter: ^0.1.0-dev.1
+  jig_protocol: ^0.1.0-dev.1

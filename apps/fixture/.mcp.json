@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "jig": {
+      "type": "stdio",
+      "command": "dart",
+      "args": ["run", "jig_mcp:jig_mcp"],
+      "tools": ["*"]
+    }
+  }
+}
